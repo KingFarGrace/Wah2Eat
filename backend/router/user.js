@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const userHandler = require('./user_hadler')
+const userHandler = require('./userHandler')
 
 router.post("/login", userHandler.login)
 

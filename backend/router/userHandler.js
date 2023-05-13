@@ -1,4 +1,6 @@
-const verify = require('../utils/validateUtil')
+const verify = require('../utils/validateUtil').verify
+const rtnFailedJson = require('../utils/jsonUtil').rtnFailedJson
+const rtnSuccessJson = require('../utils/jsonUtil').rtnSuccessJson
 const updateSchema = require('../validation_schema/userSchema').updateSchema
 const updatePwdSchema = require('../validation_schema/userSchema').updatePwdSchema
 const loginSchema = require('../validation_schema/userSchema').loginSchema

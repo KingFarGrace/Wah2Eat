@@ -32,3 +32,7 @@ function rtnSuccessJson(res, msg, obj) {
 function rtnFailedJson(res, msg) {
     return rtnJson(res, msg, false)
 }
+
+module.exports.rtnJson = rtnJson
+module.exports.rtnFailedJson = rtnFailedJson
+module.exports.rtnSuccessJson = rtnSuccessJson
