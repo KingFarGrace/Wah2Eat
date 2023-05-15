@@ -12,8 +12,8 @@ function setPlan(req, res) {
         stime: new Date()
     }).then((data, err) => {
         if (err) return rtnFailedJson(res, 'Server error, please try later.')
+        return rtnSuccessJson(res, 'Successfully set a plan.')
     })
-    return rtnSuccessJson(res, 'Successfully set a plan.')
 }
 
 function getPlan(req, res) {

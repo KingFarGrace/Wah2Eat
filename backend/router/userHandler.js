@@ -39,9 +39,9 @@ function register(req, res) {
         var userData = new userModel(body)
         userData.save().then((data, err) => {
             if (err) return rtnFailedJson(res, 'Server error, please try later.')
+        return rtnSuccessJson(res, 'Registered successfully, you can login now.')
         })
     })
-    return rtnSuccessJson(res, 'Registered successfully, you can login now.')
 }
 
 function update(req, res) {
@@ -58,8 +58,8 @@ function update(req, res) {
         }
     ).then((data, err) => {
         if (err) return rtnFailedJson(res, 'Server error, please try later.')
+        return rtnSuccessJson(res, 'Update successfully.')
     })
-    return rtnSuccessJson(res, 'Update successfully.')
 }
 
 function updatePwd(req, res) {
@@ -72,9 +72,9 @@ function updatePwd(req, res) {
         if (data.password !== body.oldPwd) return rtnFailedJson(res, 'Wrong password!')
         userModel.updateOne({ email: body.email }, { password: body.newPwd }).then((data, err) => {
             if(err) return rtnFailedJson(res, 'Server error, please try later.')
+            return rtnSuccessJson(res, 'Updata password successfully.')
         })
     })
-    return rtnSuccessJson(res, 'Updata password successfully.')
 }
 
 module.exports.login = login
