@@ -3,7 +3,7 @@ function rtnJson(res, msg, isSuccess) {
         JSON.stringify(
             {
                 msg: msg,
-                succuss: isSuccess
+                success: isSuccess
             }
         )
     )
@@ -14,7 +14,7 @@ function rtnJson(res, msg, isSuccess, obj) {
         JSON.stringify(
             {
                 msg: msg,
-                succuss: isSuccess,
+                success: isSuccess,
                 obj: obj
             }
         )
