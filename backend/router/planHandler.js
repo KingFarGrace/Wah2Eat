@@ -22,7 +22,7 @@ function getPlan(req, res) {
         if (err) return rtnFailedJson(res, 'Server error, please try later.')
         if (data === null) rtnFailedJson(res, 'Failed to find diet plan.')
         var plan = makePlan(data.aimType, data.aimWeight, data.periodLength, data.stime)
-        rtnSuccessJson(res, 'Here is your plan.', plan)
+        rtnSuccessJson(res, 'Here is your plan.', { data: data, plan: plan })
     })
 }
 
