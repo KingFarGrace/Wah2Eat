@@ -1,0 +1,35 @@
+.leaderboard {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  &-menu {
+    width: 220px;
+    flex: 0;
+    &-list {
+      list-style: none;
+    }
+    &-item {
+      font-size: 14px;
+      height: 40px;
+      line-height: 40px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-inline: 16px;
+      margin-inline: 4px;
+      margin-block: 4px;
+      cursor: pointer;
+      border-radius: 4px;
+      &:hover {
+        background: rgba(0,0,0, 0.06);
+      }
+      &.active {
+        background-color: #e6f4ff;
+        color: #1677ff;
+      }
+    }
+  }
+  .leaderboard-content {
+    flex: 1;
+  }
+}
