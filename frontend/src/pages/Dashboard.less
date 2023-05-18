@@ -1,0 +1,24 @@
+.dashboard {
+  padding-top: 20px;
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-action {
+      color: #1677ff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &-context {
+    .card {
+      margin-bottom: 20px;
+    }
+  }
+}
