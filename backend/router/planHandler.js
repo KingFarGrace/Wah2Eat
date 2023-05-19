@@ -132,4 +132,3 @@ function makePlan(aimType, aimWeight, periodLength, stime, age, gender, height, 
   
   module.exports.setPlan = setPlan
   module.exports.getPlan = getPlan
-  module.exports.getPlan = makePlan
