@@ -4,11 +4,13 @@ import {Button, Form, Input, message} from 'antd';
 import {useNavigate} from "react-router-dom";
 import request from '@/utils/request';
 
+// Define the layout for the form
 const layout = {
-    labelCol: {span: 8},
-    wrapperCol: {span: 16},
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
 };
 
+// Validation messages for form fields
 const validateMessages = {
     required: '${label} is required!',
     types: {
@@ -17,25 +19,37 @@ const validateMessages = {
 };
 
 const Register = () => {
+    // Retrieve the message API and context holder from the antd message hook
     const [messageApi, contextHolder] = message.useMessage();
+
+    // Define the loading state of the form submission
     const [loading, setLoading] = React.useState(false);
+
+    // Get the navigation function from react-router-dom
     const navigate = useNavigate();
 
-    const onFinish = async ({user}) => {
+    // Handle form submission
+    const onFinish = async ({ user }) => {
         setLoading(true);
+
         try {
+            // Send a register request to the server
             const response = await request.post('/api/register', user);
-            if(response.success || response.succuss) {
+            if (response.success || response.succuss) {
+                // Display a success message if the registration was successful
                 messageApi.open({
                     type: 'success',
                     content: 'Sign up successful!'
                 });
+                // Navigate to the login page
                 navigate('/login');
                 return;
             }
-            messageApi.error({type: 'error', content: response.msg})
+            // Display an error message if the registration was unsuccessful
+            messageApi.error({ type: 'error', content: response.msg })
         } catch (error) {
             console.error(error);
+            // Display an error message if an error occurred during the registration
             messageApi.open({
                 type: 'error',
                 content: 'Sign up unsuccessful!',

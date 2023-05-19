@@ -1,20 +1,23 @@
 import * as React from 'react';
 import './Dashboard.less';
 import {Space, Card, Typography} from 'antd';
-import {EditOutlined, PlusOutlined, ThunderboltOutlined} from "@ant-design/icons";
+import {EditOutlined, ThunderboltOutlined} from "@ant-design/icons";
 import {FoodRecord} from '@/components';
 import {calculateBMI} from '@/utils/calculate';
 import {useSelector} from "react-redux";
-import request from '@/utils/request';
 import EditPersonalInformationFormModal from "@/pages/components/EditPersonalInformationFormModal";
 import ResetPasswordFormModal from "@/pages/components/ResetPasswordFormModal";
 
 const {Title} = Typography;
 
 const Dashboard = () => {
+    // State to manage the visibility of the reset password form modal
     const [restVisible, setRestVisible] = React.useState(false);
+
+    // State to manage the visibility of the edit personal information form modal
     const [editVisible, setEditVisible] = React.useState(false);
 
+    // Accessing user data from the Redux store
     const userData = useSelector((state) => state.auth.userData);
 
     return (

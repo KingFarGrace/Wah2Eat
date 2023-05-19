@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Input, Modal, Form, Radio, message} from 'antd';
+import { Input, Modal, Form, Radio, message } from 'antd';
 import request from '@/utils/request';
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginSuccess } from '@/features/auth/authSlice';
 
 const EditPersonalInformationFormModal = (
@@ -17,32 +17,39 @@ const EditPersonalInformationFormModal = (
     const [editLoading, setEditLoading] = React.useState(false);
     const dispatch = useDispatch();
 
+    // Set form fields with user data when the modal becomes visible
     React.useEffect(() => {
-        if(visible) {
+        if (visible) {
             editForm.setFieldsValue(userData || {});
         }
     }, [visible, userData]);
 
+    // Update the visibility state of the modal
     React.useEffect(() => {
         setEditVisible(visible);
-    }, [visible])
+    }, [visible]);
 
+    // Handle the edit action
     const handleEdit = async () => {
         editForm.validateFields().then(async (values) => {
             setEditLoading(true);
             try {
-                const response = await request.post('/api/user/update', {...values, email: userData.email});
-                if(response.success || response.succuss) {
+                // Make a request to update the user information
+                const response = await request.post('/api/user/update', { ...values, email: userData.email });
+                if (response.success || response.succuss) {
+                    // Display success message and update user data in Redux store
                     messageApi.open({
                         type: 'success',
                         content: 'Edit Personal Information successful!'
                     });
-                    dispatch(loginSuccess({...userData, ...values}));
+                    dispatch(loginSuccess({ ...userData, ...values }));
                     onAfter && onAfter();
                     return;
                 }
-                messageApi.error({type: 'error', content: response.msg});
+                // Display error message if the request was not successful
+                messageApi.error({ type: 'error', content: response.msg });
             } catch (error) {
+                // Display error message if an exception occurred during the request
                 messageApi.open({
                     type: 'error',
                     content: 'Edit Personal Information unsuccessful!',

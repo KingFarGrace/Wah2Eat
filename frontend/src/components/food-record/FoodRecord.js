@@ -1,6 +1,7 @@
 import React from 'react';
-import {Table} from 'antd';
+import { Table } from 'antd';
 
+// Define the columns for the table
 const columns = [
     {
         title: 'Dietary Intake',
@@ -19,6 +20,7 @@ const columns = [
     },
 ];
 
+// Define the data source for the table
 const dataSource = [
     {
         id: '1',
@@ -36,7 +38,8 @@ const dataSource = [
 
 const FoodRecord = () => {
     return (
-        <Table columns={columns} pagination={false} rowKey={record => record.id} dataSource={dataSource}/>
+        // Render the table component with the defined columns, data source, and row key
+        <Table columns={columns} pagination={false} rowKey={record => record.id} dataSource={dataSource} />
     );
 };
 

@@ -4,8 +4,11 @@ import { Col, Row, Space, Input, Button, Card, Divider } from 'antd';
 
 const Comparison = () => {
 
-    const [nutritional, setNutritional] = React.useState()
-    const [food, setFood] = React.useState()
+    // Define the state for nutritional information
+    const [nutritional, setNutritional] = React.useState();
+
+    // Define the state for food information
+    const [food, setFood] = React.useState();
 
     return (
         <div className={'container comparison'}>

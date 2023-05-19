@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '@/features/auth/authSlice';
 
-
+// Validation messages for form fields
 const validateMessages = {
     required: '${label} is required!',
     types: {
@@ -16,27 +16,41 @@ const validateMessages = {
 };
 
 const Login = () => {
+    // Retrieve the message API and context holder from the antd message hook
     const [messageApi, contextHolder] = message.useMessage();
+
+    // Define the loading state of the form submission
     const [loading, setLoading] = React.useState(false);
+
+    // Get the navigation function from react-router-dom
     const navigate = useNavigate();
+
+    // Get the dispatch function from react-redux
     const dispatch = useDispatch();
 
+    // Handle form submission
     const onFinish = async (values) => {
         setLoading(true);
 
         try {
+            // Send a login request to the server
             const response = await request.post('/api/login', values);
-            if(response.success || response.succuss) {
+            if (response.success || response.succuss) {
+                // Display a success message if the login was successful
                 messageApi.open({
                     type: 'success',
                     content: 'Sign in successful!'
                 });
+                // Dispatch the login success action to update the authentication state
                 dispatch(loginSuccess(response.obj));
+                // Navigate to the home page
                 navigate('/');
                 return;
             }
-            messageApi.error({type: 'error', content: response.msg})
+            // Display an error message if the login was unsuccessful
+            messageApi.error({ type: 'error', content: response.msg })
         } catch (error) {
+            // Display an error message if an error occurred during the login
             messageApi.open({
                 type: 'error',
                 content: 'Sign in unsuccessful!',

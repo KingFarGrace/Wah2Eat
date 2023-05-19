@@ -1,40 +1,54 @@
 import * as React from 'react';
 import './Answer.less';
-import {Col, Row, Space, Input, Button, Card, Divider, message} from 'antd';
-import {AudioOutlined} from "@ant-design/icons";
+import {Input, Card, message} from 'antd';
 import request from '@/utils/request';
 
-const {Search} = Input;
+const { Search } = Input;
 
+// Define the menu items for answer selection
 const answerMenuItems = [
-    {id: 1, name: 'weight'},
-    {id: 2, name: 'weight loss indicators'},
-    {id: 3, name: 'weight loss principle'},
-    {id: 4, name: 'basal metabolism'},
-    {id: 5, name: 'obesity factor'},
-    {id: 6, name: 'how to make a plan'},
+    { id: 1, name: 'weight' },
+    { id: 2, name: 'weight loss indicators' },
+    { id: 3, name: 'weight loss principle' },
+    { id: 4, name: 'basal metabolism' },
+    { id: 5, name: 'obesity factor' },
+    { id: 6, name: 'how to make a plan' },
 ];
 
 const Answer = () => {
+    // Define the selected menu key state
     const [selectedMenuKey, setSelectedMenuKey] = React.useState(1);
+
+    // Define the keyword state for searching
     const [keyword, setKeyword] = React.useState('');
+
+    // Define the loading state of the search
     const [loading, setLoading] = React.useState(false);
+
+    // Retrieve the message API and context holder from the antd message hook
     const [messageApi, contextHolder] = message.useMessage();
+
+    // Define the items state for displaying search results
     const [items, setItems] = React.useState([]);
 
+    // Handle search
     const onSearch = async (value) => {
         setLoading(true);
+
         try {
+            // Send a search request to the server
             const response = await request.get('/api/qa', {
                 params: {
                     keyword: value
                 }
             });
-            if(response.success || response.succuss) {
-                setItems(response.obj)
+            if (response.success || response.succuss) {
+                // Update the items state with the search results
+                setItems(response.obj);
             }
         } catch (error) {
             console.error(error);
+            // Display an error message if the search was unsuccessful
             messageApi.open({
                 type: 'error',
                 content: 'Sign up unsuccessful!',

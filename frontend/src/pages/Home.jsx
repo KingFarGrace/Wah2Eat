@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.less';
-import {Col, Row, Card, Space} from "antd";
+import {Col, Row, Card} from "antd";
 import {ReactComponent as IconAnswer} from "@/assets/answer.svg";
 import {ReactComponent as IconDietMenu} from "@/assets/diet-menu.svg";
 import {ReactComponent as IconFood} from "@/assets/food.svg";
@@ -11,8 +11,13 @@ import {calculateBMI} from '@/utils/calculate';
 import {useNavigate} from "react-router-dom";
 
 const Home = () => {
+    // Checking if the user is logged in
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+    // Accessing user data from the Redux store
     const userData = useSelector((state) => state.auth.userData);
+
+    // React Router's navigate function for navigation
     const navigate = useNavigate();
 
     return (

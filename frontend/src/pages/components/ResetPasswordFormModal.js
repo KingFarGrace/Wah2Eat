@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Col, Row, Space, Input, Table, Card, Button, Typography, Modal, Form, Radio, message} from 'antd';
+import {Input,  Modal, Form, message} from 'antd';
 import request from '@/utils/request';
 
 const ResetPasswordFormModal = (
@@ -10,34 +10,48 @@ const ResetPasswordFormModal = (
     }
 ) => {
 
+    // Retrieve the message API and context holder from the antd message hook
     const [messageApi, contextHolder] = message.useMessage();
+
+    // Define the form for resetting the password
     const [restForm] = Form.useForm();
+
+    // Define the visibility state of the modal
     const [restVisible, setRestVisible] = React.useState(false);
+
+    // Define the loading state of the form submission
     const [restLoading, setRestLoading] = React.useState(false);
 
+    // Update the visibility state when the `visible` prop changes
     React.useEffect(() => {
         setRestVisible(visible);
     }, [visible]);
 
 
-    const handleRest =  () => {
+    // Handle the password reset form submission
+    const handleRest = () => {
         restForm.validateFields().then(async (values) => {
             setRestLoading(true);
             try {
-                const response = await request.post('/api/user/update/pwd', {...values, email: userData.email});
-                if(response.success || response.succuss) {
+                // Send a request to the server to reset the password
+                const response = await request.post('/api/user/update/pwd', { ...values, email: userData.email });
+                if (response.success || response.succuss) {
+                    // Display a success message if the password reset was successful
                     messageApi.open({
                         type: 'success',
-                        content: 'Rest Password successful!'
+                        content: 'Reset Password successful!'
                     });
+                    // Call the `onAfter` callback if provided
                     onAfter && onAfter();
                     return;
                 }
-                messageApi.error({type: 'error', content: response.msg})
+                // Display an error message if the password reset was unsuccessful
+                messageApi.error({ type: 'error', content: response.msg })
             } catch (error) {
+                // Display an error message if an error occurred during the password reset
                 messageApi.open({
                     type: 'error',
-                    content: 'Rest Password unsuccessful!',
+                    content: 'Reset Password unsuccessful!',
                 });
             } finally {
                 setRestLoading(false);
