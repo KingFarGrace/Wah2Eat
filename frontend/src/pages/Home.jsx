@@ -25,19 +25,21 @@ const Home = () => {
     const [planData, setPlanData] = React.useState([]);
 
     React.useEffect(() => {
-        (async () => {
-            const response = await request.get('/api/user/plan', {
-                params: {
-                    email: userData.email
-                }
-            });
+        if(userData) {
+            (async () => {
+                const response = await request.get('/api/user/plan', {
+                    params: {
+                        email: userData?.email
+                    }
+                });
 
-            if(response.success) {
-                setPlanData(response.obj.plan);
-            } else {
-                setPlanData([]);
-            }
-        })();
+                if(response.success) {
+                    setPlanData(response.obj.plan);
+                } else {
+                    setPlanData([]);
+                }
+            })();
+        }
     }, [])
 
     return (
