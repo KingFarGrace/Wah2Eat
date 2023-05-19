@@ -8,6 +8,10 @@ const userSchema = mongoose.Schema({
         type: String,
         default: 'Unknown.'
     },
+    age: {
+        type: Number,
+        default: 0
+    },
     height: {
         type: Number,
         default: 0

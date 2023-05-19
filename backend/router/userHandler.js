@@ -53,6 +53,7 @@ function update(req, res) {
         { 
             username: body.username, 
             gender: body.gender, 
+            age: body.age,
             height: body.height, 
             weight: body.weight 
         }

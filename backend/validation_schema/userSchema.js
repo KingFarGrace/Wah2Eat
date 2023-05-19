@@ -16,6 +16,7 @@ module.exports.updateSchema = joi.object({
     email: joi.string().email().required(),
     username: joi.string().alphanum().min(1).max(16).required(),
     gender: joi.string().required(),
+    age: joi.string().required(),
     height: joi.number().required(),
     weight: joi.number().required()
 })
